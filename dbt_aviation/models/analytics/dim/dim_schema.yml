@@ -1,0 +1,354 @@
+version: 2
+
+models:
+  - name: dim_airlines
+    description: "Dimension table for airlines"
+
+    columns:
+      - name: airline_sk
+        description: "Surrogate key for the airline dimension"
+        tests:
+          - not_null
+          - unique
+
+      - name: id
+        description: "Natural key from source data (raw id)"
+        tests:
+          - not_null
+          - unique
+
+      - name: airline_id
+        description: "Airline identifier from the API"
+        tests:
+          - not_null
+
+      - name: airline_name
+        description: "Name of the airline"
+        tests:
+          - not_null
+
+      - name: iata_code
+        description: "IATA code for the airline"
+        tests:
+          - not_null
+
+      - name: icao_code
+        description: "ICAO code for the airline"
+
+      - name: country_iso2
+        description: "Country ISO2 code"
+        tests:
+          - not_null
+
+      - name: fleet_size
+        description: "Total number of aircraft in the airline's fleet"
+
+      - name: fleet_average_age
+        description: "Average aircraft age"
+
+      - name: date_founded
+        description: "The year the airline was founded"
+
+      - name: country_name
+        description: "Full name of the country"
+
+      - name: status
+        description: "Operational status of the airline"
+
+      - name: type
+        description: "Type/category of the airline"
+
+  - name: dim_airplanes
+    description: "Dimension table for airplanes"
+
+    columns:
+      - name: airplane_sk
+        description: "Surrogate key for airplane dimension"
+        tests:
+          - not_null
+          - unique
+
+      - name: id
+        description: "Raw source primary key"
+        tests:
+          - not_null
+          - unique
+
+      - name: airplane_id
+        description: "Airplane business identifier"
+        tests:
+          - not_null
+
+      - name: iata_type
+        description: "IATA type of the aircraft"
+
+      - name: engines_count
+        description: "Number of engines"
+
+      - name: engines_type
+        description: "Engine type"
+
+      - name: first_flight_date
+        description: "Date of aircraft’s first flight"
+
+      - name: line_number
+        description: "Line/series number of the aircraft"
+
+      - name: plane_age
+        description: "Age of the aircraft"
+
+      - name: model_code
+        description: "Manufacturer model code"
+
+      - name: model_name
+        description: "Aircraft model name"
+        tests:
+          - not_null
+
+      - name: plane_owner
+        description: "Current owner of the aircraft"
+
+      - name: plane_status
+        description: "Operational status"
+
+      - name: production_line
+        description: "Aircraft production line"
+
+  - name: dim_airports
+    description: "Dimension table for airports"
+
+    columns:
+      - name: airport_sk
+        description: "Surrogate key for airport dimension"
+        tests:
+          - not_null
+          - unique
+
+      - name: id
+        description: "Raw primary key from source"
+        tests:
+          - not_null
+          - unique
+
+      - name: airport_id
+        description: "Business identifier for the airport"
+        tests:
+          - not_null
+
+      - name: iata_code
+        description: "IATA airport code"
+        tests:
+          - not_null
+          - unique
+
+      - name: icao_code
+        description: "ICAO airport code"
+
+      - name: country_iso2
+        description: "ISO-2 country code"
+
+      - name: latitude
+        description: "Latitude coordinate"
+
+      - name: longitude
+        description: "Longitude coordinate"
+
+      - name: airport_name
+        description: "Full name of the airport"
+        tests:
+          - not_null
+
+      - name: country_name
+        description: "Country name"
+
+      - name: timezone
+        description: "Airport timezone"
+
+  - name: dim_cities
+    description: "Dimension table for cities"
+    columns:
+      - name: city_sk
+        description: "Surrogate key for the city dimension"
+        tests:
+          - not_null
+          - unique
+
+      - name: id
+        description: "Raw city record ID"
+        tests:
+          - not_null
+
+      - name: city_id
+        description: "External city identifier"
+        tests:
+          - not_null
+
+      - name: city_name
+        description: "Name of the city"
+        tests:
+          - not_null
+
+      - name: iata_code
+        description: "City IATA code"
+
+      - name: country_iso2
+        description: "ISO2 country code"
+
+      - name: latitude
+        description: "Latitude coordinate"
+
+      - name: longitude
+        description: "Longitude coordinate"
+
+      - name: timezone
+        description: "Timezone of the city"
+
+  - name: dim_countries
+    description: "Dimension table containing country details."
+    columns:
+
+      - name: country_sk
+        description: "Surrogate key"
+        tests:
+          - unique
+          - not_null
+
+      - name: country_id
+        description: "Business key from source"
+        tests:
+          - not_null
+
+      - name: country_name
+        description: "Country name"
+        tests:
+          - not_null
+
+      - name: capital
+        description: "Country capital"
+        tests: []
+
+      - name: continent
+        description: "Continent name"
+        tests:
+          - accepted_values:
+              values: ["Africa", "Asia", "Europe", "North America", "South America", "Oceania", "Antarctica", "Unknown"]
+
+      - name: country_iso2
+        description: "2-letter ISO code"
+        tests:
+          - unique
+          - not_null
+
+      - name: country_iso3
+        description: "3-letter ISO code"
+        tests:
+          - unique
+          - not_null
+
+      - name: currency_code
+        description: "Currency code"
+        tests: []
+
+      - name: currency_name
+        description: "Currency name"
+        tests: []
+
+      - name: population
+        description: "Population"
+        tests:
+          - not_null
+
+  - name: dim_dates
+    description: "Date dimension table generated from flight dates."
+    columns:
+
+      - name: date_sk
+        description: "Surrogate key for dates"
+        tests:
+          - unique
+          - not_null
+
+      - name: full_date
+        description: "Actual date value"
+        tests:
+          - unique
+          - not_null
+
+      - name: year
+        tests:
+          - not_null
+
+      - name: quarter
+        tests:
+          - not_null
+
+      - name: quarter_number
+        tests:
+          - not_null
+
+      - name: month
+        tests:
+          - not_null
+
+      - name: month_number
+        tests:
+          - not_null
+
+      - name: week_number
+        tests:
+          - not_null
+
+      - name: week_day_name
+        tests:
+          - not_null
+
+      - name: week_day_number
+        tests:
+          - not_null
+
+      - name: day_of_month
+        tests:
+          - not_null
+
+      - name: day_of_year
+        tests:
+          - not_null
+
+      - name: is_week_end
+        tests:
+          - not_null
+
+      - name: is_holiday
+        tests:
+          - not_null
+
+  - name: dim_taxes
+    description: "Dimension table for taxes with a surrogate key."
+    columns:
+
+      - name: tax_sk
+        description: "Surrogate key for taxes"
+        tests:
+          - unique
+          - not_null
+
+      - name: tax_id
+        description: "Natural/business key for the tax"
+        tests:
+          - not_null
+          - unique
+
+      - name: id
+        description: "Internal raw table incremental ID"
+        tests:
+          - not_null
+
+      - name: tax_name
+        description: "Tax name"
+        tests:
+          - not_null
+
+      - name: iata_code
+        description: "IATA code for the tax"
+        tests:
+          - not_null

@@ -1,0 +1,230 @@
+version: 2
+
+models:
+  - name: sr_airlines
+    description: "Cleaned staging table for airlines"
+    columns:
+      - name: id
+        description: "Primary key of airline in raw data"
+        tests:
+          - not_null
+          - unique
+
+      - name: airline_id
+        description: "Airline identifier"
+        tests:
+          - not_null
+
+      - name: airline_name
+        description: "Name of the airline"
+        tests:
+          - not_null
+
+      - name: iata_code
+        description: "IATA airline code"
+        tests:
+          - not_null
+
+      - name: country_iso2
+        description: "Country ISO2 code"
+        tests:
+          - not_null
+
+  - name: sr_airplanes
+    description: "Cleaned staging table for airplanes"
+    columns:
+      - name: id
+        description: "Primary key of airplane record"
+        tests:
+          - not_null
+          - unique
+
+      - name: airplane_id
+        description: "Airplane unique identifier"
+        tests:
+          - not_null
+
+      - name: model_name
+        description: "Model name of the airplane"
+        tests:
+          - not_null
+
+      - name: registration_number
+        description: "Aircraft registration number (tail number)"
+        tests:
+          - not_null
+
+      - name: airline_iata_code
+        description: "IATA code of airplane's airline"
+        tests:
+          - not_null
+
+      - name: airline_icao_code
+        description: "ICAO code of airplane's airline"
+        tests:
+          - not_null
+
+  - name: sr_airports
+    description: "Cleaned airports data model"
+    columns:
+      - name: id
+        description: "Primary key of the airport record"
+        tests:
+          - not_null
+          - unique
+
+      - name: gmt
+        description: "UTC offset of the airport"
+
+      - name: airport_id
+        description: "Airport external ID"
+        tests:
+          - not_null
+
+
+      - name: iata_code
+        description: "IATA code of the airport"
+        tests:
+          - not_null
+          - unique
+
+      - name: city_iata_code
+        description: "City IATA code"
+
+      - name: icao_code
+        description: "ICAO code of the airport"
+
+      - name: country_iso2
+        description: "Country ISO-2 code"
+
+      - name: geoname_id
+        description: "GeoNames database ID"
+
+      - name: latitude
+        description: "Latitude coordinate"
+
+      - name: longitude
+        description: "Longitude coordinate"
+
+      - name: airport_name
+        description: "Name of the airport"
+        tests:
+          - not_null
+
+      - name: country_name
+        description: "Name of the country"
+
+      - name: phone_number
+        description: "Airport phone number"
+
+      - name: timezone
+        description: "Airport timezone"
+
+  - name: sr_cities
+    description: "Cleaned cities data model"
+    columns:
+      - name: id
+        description: "Primary key of the city record"
+        tests:
+          - not_null
+          - unique
+
+      - name: gmt
+        description: "UTC offset of the city"
+
+      - name: city_id
+        description: "External city ID"
+
+      - name: iata_code
+        description: "City IATA code"
+
+      - name: country_iso2
+        description: "Country ISO-2 code"
+
+      - name: geoname_id
+        description: "GeoNames database ID"
+
+      - name: latitude
+        description: "Latitude of the city"
+
+      - name: longitude
+        description: "Longitude of the city"
+
+      - name: city_name
+        description: "The name of the city"
+        tests:
+          - not_null
+
+      - name: timezone
+        description: "The timezone for the city"
+
+  - name: sr_countries
+    description: "Cleaned staging model for countries data"
+    columns:
+      - name: id
+        description: "Primary key of the countries table"
+        tests:
+          - not_null
+          - unique
+
+      - name: capital
+      - name: currency_code
+      - name: fips_code
+      - name: country_iso2
+        tests:
+          - not_null
+      - name: country_iso3
+      - name: continent
+      - name: country_id
+      - name: country_name
+        tests:
+          - not_null
+      - name: currency_name
+      - name: country_iso_numeric
+      - name: phone_prefix
+      - name: population
+      
+  - name: sr_flights
+    description: "Cleaned staging table for flights data"
+    columns:
+      - name: flight_date
+        description: "Date of the flight"
+
+      - name: flight_status
+        description: "Status of the flight (scheduled, active, landed, cancelled, etc.)"
+
+      - name: departure
+        description: "Raw JSON data for departure information"
+
+      - name: arrival
+        description: "Raw JSON data for arrival information"
+
+      - name: airline
+        description: "Raw JSON data for airline information"
+
+      - name: flight
+        description: "Raw JSON data for flight information"
+
+      - name: aircraft
+        description: "Aircraft information"
+
+      - name: live
+        description: "Live flight tracking information"
+
+  - name: sr_taxes
+    description: "Cleaned staging table for taxes"
+    columns:
+      - name: id
+        description: "Primary key of the taxes table"
+        tests:
+          - not_null
+          - unique
+
+      - name: tax_id
+        description: "External tax ID"
+
+      - name: tax_name
+        description: "Name of the tax"
+
+      - name: iata_code
+        description: "IATA airline code associated with the tax"

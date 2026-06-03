@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Data files (raw extracts — do not commit)
+data/
+
+# dbt compiled output and logs
+dbt_aviation/target/
+dbt_aviation/logs/
+dbt_aviation/dbt_packages/
+logs/
+target/
+
+# macOS
+.DS_Store

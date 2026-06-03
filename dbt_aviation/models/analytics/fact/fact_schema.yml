@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: fact_flights
+    description: "Fact table containing one row per flight with surrogate keys and measures"
+    columns:
+
+      - name: flight_sk
+        description: "Surrogate key for the flight"
+        tests:
+          - not_null
+          - unique
+
+      - name: date_sk
+        description: "Foreign key to dim_dates"
+        tests:
+          - not_null
+
+      - name: flight_date
+        description: "Date of the flight"
+        tests:
+          - not_null
+
+      - name: flight_status
+        description: "Current status of the flight"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["active", "scheduled", "landed", "cancelled", "incident", "diverted"]
+
+      - name: departure_delay_minutes
+        description: "Departure delay in minutes, 0 if on time"
+        tests:
+          - not_null
+
+      - name: arrival_delay_minutes
+        description: "Arrival delay in minutes, 0 if on time"
+        tests:
+          - not_null
+
+      - name: number_of_delay
+        description: "1 if the flight was delayed, 0 if on time"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+
+      - name: delay_status_flag
+        description: "Human-readable delay status"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["On Time", "Delayed", "Cancelled"]
+
+      - name: is_cancelled
+        description: "True if the flight was cancelled"
+        tests:
+          - not_null
+
+      - name: on_time_performance_score
+        description: "Score from 0 to 100, higher is better"
+        tests:
+          - not_null

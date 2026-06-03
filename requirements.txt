@@ -1,0 +1,17 @@
+# API & Data
+requests==2.31.0
+pandas==2.2.0
+
+# Database
+psycopg2-binary==2.9.10
+sqlalchemy==2.0.50
+
+# Environment variables
+python-dotenv==1.0.0
+
+# dbt
+dbt-core==1.5.2
+dbt-postgres==1.5.2
+
+# Testing
+pytest==7.4.0

@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: raw          # This matches the source name you use in your SQL models
+    database: aviation_dw
+    schema: raw  # the schema in your database
+    tables:
+      - name: airports
+        description: "Raw airports table"
+      - name: airlines
+        description: "Raw airlines table"
+      - name: airplanes
+        description: "Raw airplanes table"
+      - name: cities
+        description: "Raw cities table"
+      - name: countries
+        description: "Raw countries table"
+      - name: flights
+        description: "Raw flights table"
+      - name: taxes
+        description: "Raw taxes table"
