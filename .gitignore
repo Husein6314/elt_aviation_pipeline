@@ -1,9 +1,16 @@
 # Python
 venv/
+airflow_venv/
 __pycache__/
 *.pyc
 *.pyo
 .env
+
+# Airflow generated files
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_admin_password.txt
 
 # Data files (raw extracts — do not commit)
 data/
@@ -14,6 +21,12 @@ dbt_aviation/logs/
 dbt_aviation/dbt_packages/
 logs/
 target/
+
+# Airflow runtime files
+airflow-*.pid
+airflow-*.err
+airflow-*.out
+airflow-*.log
 
 # macOS
 .DS_Store

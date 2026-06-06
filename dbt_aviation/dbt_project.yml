@@ -41,14 +41,19 @@ clean-targets:         # directories to be removed by `dbt clean`
 #         +materialized: table
 #       dim:
 #         +materialized: table
+
+
 models:
   dbt_aviation:
 
     staging:
       +materialized: view
+      +schema: staging
 
     analytics:
       fact:
         +materialized: table
+        +schema: analytics
       dim:
         +materialized: table
+        +schema: analytics
